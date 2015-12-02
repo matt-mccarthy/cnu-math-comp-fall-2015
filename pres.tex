@@ -30,11 +30,6 @@
 \newtheorem{defn}{Definition}
 \newtheorem{defns}{``Definition"}
 
-\newcommand{\ap}{\ensuremath{\swarrow\,\searrow}}
-\newcommand{\nr}{\ensuremath{\swarrow\,\,\,\,\,\,\,\,\,}}
-\newcommand{\pl}[1]{\ensuremath{\textup{Li}_#1}}
-\setlength{\tabcolsep}{0pt}
-
 \def\CC{\mathbb{C}}
 \def\RR{\mathbb{R}}
 \def\ZZ{\mathbb{Z}}
@@ -83,7 +78,7 @@
 
 \begin{frame}
 	\frametitle{Working Definition of an Elliptic Curve}
-	
+
 	\begin{defns}[Elliptic Curve (from \cite{AEC})]
 		An \textit{elliptic curve} over a field $\FF$ is a nonsingular cubic equation of the form
 		\begin{equation}\label{WEQN}
@@ -132,7 +127,7 @@
 
 \begin{frame}
 	\frametitle{Chord and Tangent Rule}
-	
+
 	An elliptic curve over a field forms a group under the chord and tangent rule \cite{Galbraith}.
 	\begin{columns}
 	\column{0.2\textwidth}
@@ -141,7 +136,7 @@
 		\includegraphics[scale=.2]{p_plus_q.png}
 		\caption{$a+b$}
 	\end{figure}
-	
+
 	\column{0.2\textwidth}
 	\begin{figure}
 		\centering
@@ -173,7 +168,7 @@
 
 \begin{frame}
 	\frametitle{Fermat's Last Theorem}
-	
+
 	\begin{thm}
 	For $n\geq 3$, the equation
 	\[
@@ -181,7 +176,7 @@
 	\]
 	has no solutions when $x$,$y$, and $z$ are natural numbers.
 	\end{thm}
-	
+
 	\begin{itemize}
 	\item This theorem was conjectured by Pierre de Fermat in 1637
 	\item Proved by Andrew Wiles in 1994 using elliptic curves
@@ -190,20 +185,42 @@
 
 \begin{frame}
 	\frametitle{Cryptography}
-	
+
 	\begin{itemize}
 	\item We call the set of remainders when dividing by a prime, $\ZZ_p$.
 	\item The logarithm of a number, $\log y$ is a solution to the equation $e^x=y$.
 	\item The discrete logarithm of a point on an elliptic curve is a solution to the equation $kP=Q$.
 	\item On elliptic curves over $\ZZ_p$, finding the discrete log of a point is hard.
 	\end{itemize}
-	
+
 	This means we can use it for cryptography!
+\end{frame}
+
+\begin{frame}
+	\frametitle{Elgamal}
+
+	\begin{enumerate}
+		\item $A$ and $B$ agree on a point $Q$ on an elliptic curve $E$.
+		\item $A$ and $B$ choose integers $a$ and $b$ respectively and publish $aQ$ and $bQ$.
+		\item $A$ wants to send a message to $B$.
+		\begin{itemize}
+			\item $A$ embeds message $m$ into a point on $E$, called $P_m$.
+			\item $A$ then sends $P_m+a(bQ)$ to $B$.
+		\end{itemize}
+		\item $B$ wants to retrieve the message $A$ sent him.
+		\begin{itemize}
+			\item $B$ computes,
+			\[
+				(P_m+a(bQ))-b(aQ)=P_m+abQ-abQ=P_m.
+			\]
+			\item $B$ then reverses the embedding to get back $m$.
+		\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}[allowframebreaks]
 \frametitle{References}
-\begin{thebibliography}{10}    
+\begin{thebibliography}{10}
 	\bibitem{Galbraith}
 		Steven D. Galbraith
 		\newblock Mathematics of Public Key Cryptography
